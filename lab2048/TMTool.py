@@ -23,8 +23,9 @@ class TMTool:
     def __init__(self):
         # self.stopwords_tw = self.__load_stopwords_url("https://github.com/lab2048/pyCorpus/raw/main/stopwords_tw.txt")
         # self.stopwords_cn = self.__load_stopwords_url("https://github.com/lab2048/pyCorpus/raw/main/stopwords_cn.txt")
-        self.stopwords_tw = self.__load_stopwords_file("stopwords_tw.txt")
-        self.stopwords_cn = self.__load_stopwords_file("stopwords_cn.txt")
+        self.stopwords = self.__load_text("stopwords_tw.txt")
+        self.userdict = self.__load_text("userdict.txt")
+        self.stopwords_cn = self.__load_text("stopwords_cn.txt")
 
     """
     The highlight_matched_word() function takes a pattern and a sentence as input 
@@ -56,11 +57,11 @@ class TMTool:
     #         stopwords = file.read().split("\n")[1:]
     #     return stopwords
     
-    def __load_stopwords_file(self, filename):
+    def __load_text(self, filename):
         resource_path = f'data/{filename}'
-        stopwords_content = pkg_resources.resource_string(__name__, resource_path)
-        stopwords = stopwords_content.decode('utf-8').splitlines()
-        return stopwords[1:]            
+        text_content = pkg_resources.resource_string(__name__, resource_path)
+        text = text_content.decode('utf-8').splitlines()
+        return text
     
     def __load_stopwords_url(self, url):            
         text = urlopen(url).read().decode('utf-8')
