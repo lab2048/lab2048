@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='tm2048',
+    name='lab2048',
     version='0.1.0',
     url='https://github.com/lab2048/lab2048',
     author='Jilung Hsieh',
