@@ -1,12 +1,12 @@
 # How-to
-- Install: `pip install git+https://github.com/lab2048/tm2048.git`
+- Install: `pip install git+https://github.com/lab2048/lab2048.git`
 
 # Description
 
 ## TMTool
 
 * Variables
-  * `setowords_tw`: StopWords of zh-tw, from https://github.com/lab2048/pyCorpus/raw/main/stopwords_tw.txt"
+  * `setowords`: StopWords of zh-tw, from https://github.com/lab2048/pyCorpus/raw/main/stopwords_tw.txt"
   * `setowords_cn`: StopWords of zh-cn, from https://github.com/lab2048/pyCorpus/raw/main/stopwords_cn.txt"
 
 * Modules for tokens

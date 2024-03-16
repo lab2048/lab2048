@@ -1,5 +1,4 @@
 import pickle
-import pandas as pd
 from IPython.display import Markdown, display
 pd.options.display.float_format = '{:.4f}'.format
 
