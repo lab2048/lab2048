@@ -1,19 +1,7 @@
 #! /usr/bin/env python
-
 import re
 import pkg_resources
-from urllib.request import urlopen
-import unicodedata # for removing Chinese puctuation
 from collections import Counter
-from gensim.models import Word2Vec
-
-
-from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d, LinearColorMapper, LogColorMapper
-from bokeh.plotting import figure, output_file, show
-from bokeh.io import output_notebook
-output_notebook()
-
-from sklearn.manifold import TSNE
 import pandas as pd
 import numpy as np
 import time
@@ -63,7 +51,8 @@ class TMTool:
         text = text_content.decode('utf-8').splitlines()
         return text
     
-    def __load_stopwords_url(self, url):            
+    def __load_stopwords_url(self, url):     
+        from urllib.request import urlopen       
         text = urlopen(url).read().decode('utf-8')
         return text.split("\n")[1:]     
         
@@ -85,6 +74,7 @@ class TMTool:
 
     @staticmethod
     def dePunctuation(words):
+        import unicodedata # for removing Chinese puctuation
         out = []
         for word in words:
             if word != " " and not unicodedata.category(word[0]).startswith('P'):
@@ -142,6 +132,7 @@ class TMTool:
     
     @staticmethod
     def get_word2vec(tokens_list, size=100, window=5, min_count=5):
+        from gensim.models import Word2Vec
         model = Word2Vec(tokens_list, min_count=min_count, size=size, window=window, sg=0, workers=4)
         return model
 
@@ -152,6 +143,12 @@ class TMTool:
 # """ 
     @staticmethod
     def plot_w2v_tsne_bokeh(w_f, w2v, title_text="word2vec"): 
+        from sklearn.manifold import TSNE
+        from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d, LinearColorMapper, LogColorMapper
+        from bokeh.plotting import figure, output_file, show
+        from bokeh.io import output_notebook
+        output_notebook()
+        
         word_freq = [(w, f) for w, f in w_f if len(w) > 1]
 
         wv  = [w2v[w] for w, f in word_freq]

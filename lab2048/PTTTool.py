@@ -4,9 +4,6 @@ from datetime import datetime
 from collections import Counter
 
 
-import zhon.hanzi
-zh_pat = f"[{zhon.hanzi.characters}|{zhon.hanzi.punctuation}]"
-
 def convert_date_string(date_str):
     pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
     if re.match(pattern, date_str):
@@ -28,6 +25,11 @@ def filter_post_df(post_df, start_month=None, end_month=None):
 # Cleaning non-Chinese text and white space
 
 def clean_text(text):
+    # zh_pat = r'[\u4e00-\u9fff]+'
+    # zh_pat = r'[\u4e00-\u9fff\u3400-\u4dbf\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\u2ceb0-\u2ebef\u30000-\u3134f]+'
+    import zhon.hanzi
+    zh_pat = f"[{zhon.hanzi.characters}|{zhon.hanzi.punctuation}]"
+    
     text = re.sub('[／「」\r\t ]+', '', text)
     text = re.sub("[\n\s]+", " ", text)
     text = re.sub('媒體來源.*?新聞標題', '', text)

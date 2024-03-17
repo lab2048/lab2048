@@ -1,8 +1,4 @@
 import re
-
-# zh_pat = r'[\u4e00-\u9fff]+'
-zh_pat = r'[\u4e00-\u9fff\u3400-\u4dbf\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\u2ceb0-\u2ebef\u30000-\u3134f]+'
-
 import time
 
 def timer_decorator(func):
