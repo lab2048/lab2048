@@ -16,12 +16,16 @@ def convert_timestamp(post_df):
     post_df['ptime'] = post_df['timestamp'].dt.strftime('%Y-%m-%d')
     return post_df
 
-def filter_post_df(post_df, start_month=None, end_month=None):
-    start_date = pd.Period(start_month, freq='M')
-    end_date = pd.Period(end_month, freq='M')
-    return post_df[(post_df['month_year'] >= start_date) & (post_df['month_year'] <= end_date)]
+# def filter_post_df(post_df, start_month=None, end_month=None):
+#     start_date = pd.Period(start_month, freq='M')
+#     end_date = pd.Period(end_month, freq='M')
+#     return post_df[(post_df['month_year'] >= start_date) & (post_df['month_year'] <= end_date)]
 
 
+def filter_post_by_date(post_df, start_date, end_date):
+    start_date = pd.to_datetime(start_date, format='%Y-%m-%d', errors='coerce')
+    end_date = pd.to_datetime(end_date, format='%Y-%m-%d', errors='coerce')
+    return post_df[(post_df['timestamp'] >= start_date) & (post_df['timestamp'] <= end_date)]
 # Cleaning non-Chinese text and white space
 
 def clean_text(text):
