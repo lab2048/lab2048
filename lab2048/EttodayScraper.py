@@ -38,7 +38,7 @@ class EttodayScraper:
                 href = page.get_attribute('href')
                 if href is not None:
                     self.allpages.append(href)
-        print("Scraped Links: ", len(scraper.allpages))
+        print("Scraped Links: ", len(self.allpages))
 
     def close_driver(self):
         self.driver.quit()
