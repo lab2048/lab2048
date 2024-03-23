@@ -136,6 +136,10 @@ class EttodayScraper:
 
 
 if __name__ == "__main__":
+    
+    
+    pip install git+https://github.com/lab2048/lab2048.git
+    from lab2048 import EttodayScraper
     keyword = "chatgpt"
     driver_path = '/Users/jirlong/Downloads/geckodriver'
     scraper = EttodayScraper(keyword, driver_path)
