@@ -25,6 +25,14 @@ class TMTool:
         # highlighted_sentence = re.sub(pattern, r'\033[1m\033[43m\g<0>\033[0m', sentence) # yellow backgorund
         print(highlighted_sentence)
 
+    @staticmethod    
+    def read_gsheet(sheet_id =  None, sheet_name = None):
+        url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}'
+        print(url)
+        raw = pd.read_csv(url)
+        return raw
+    
+    
     @staticmethod
     def label_text(text):
         emails = re.findall(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text)
