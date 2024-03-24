@@ -22,6 +22,7 @@ class EttodayScraper:
         self.keyword = keyword
         self.allpages = []
         self.error_page_id = []
+        self.links = []
         self.dates = []
         self.titles = []
         self.paragraphs = []
@@ -32,6 +33,7 @@ class EttodayScraper:
     def scrape_pages(self, start_page=1, end_page=139):
         for pagenum in range(start_page, end_page):
             url = f"https://finance.ettoday.net/search.php7?keyword={self.keyword}&page={pagenum}"
+            print("Scraping...", url)
             self.driver.get(url)
             subpages = self.driver.find_elements(By.CLASS_NAME, 'piece')
             for page in subpages:
@@ -75,7 +77,7 @@ class EttodayScraper:
 
                 # get tag words
                 tag_word_list = self._get_tags()
-
+                self.links.append(url)
                 self.dates.append(date)
                 self.titles.append(title)
                 self.paragraphs.append(paragraph)
@@ -120,6 +122,7 @@ class EttodayScraper:
 
     def save_pickle(self, filename=None):
         info_dict = {'dates': self.dates,
+                     'links': self.links,
                      'titles': self.titles,
                      'context': self.paragraphs,
                      'tags': self.tags}
@@ -132,7 +135,6 @@ class EttodayScraper:
         return df
 
 
-# 使用範例
 
 
 if __name__ == "__main__":
@@ -142,10 +144,11 @@ if __name__ == "__main__":
     
     from lab2048.EttodayScraper import EttodayScraper
     keyword = "chatgpt"
-    driver_path = '/Users/jirlong/Downloads/geckodriver'
+    driver_path = '/Users/jirlong/Library/CloudStorage/Dropbox/Programming/drivers/geckodriver'
+    # driver_path = '/Users/jirlong/Library/CloudStorage/Dropbox/Programming/drivers/chromedriver-mac-arm64/chromedriver'
     scraper = EttodayScraper(keyword, driver_path)
     
-    scraper.scrape_pages(1, 2) 
+    scraper.scrape_pages(1, 15) 
     scraper.save_pages_to_file()
     
     # scraper.load_pages_from_file("ettoday-pages-chatgpt.txt")
