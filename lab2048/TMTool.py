@@ -58,12 +58,12 @@ class TMTool:
         text_content = pkg_resources.resource_string(__name__, resource_path)
         text = text_content.decode('utf-8').splitlines()
         return text
-    
-    def __load_stopwords_url(self, url):     
-        from urllib.request import urlopen       
-        text = urlopen(url).read().decode('utf-8')
-        return text.split("\n")[1:]     
-        
+
+    # def __load_stopwords_url(self, url):     
+    #     from urllib.request import urlopen       
+    #     text = urlopen(url).read().decode('utf-8')
+    #     return text.split("\n")[1:]     
+
     def deStopWords(self, words):
         out = []
         for word in words:
@@ -77,8 +77,9 @@ class TMTool:
         return list(jieba.cut(text, HMM=True))
     
     def jieba_tagger(self, text):
-        import jiebaw
-        # incomplete
+        import jieba
+        print("[Imcomplete function]")
+        # TODO: add userdict
 
     @staticmethod
     def dePunctuation(words):
@@ -129,6 +130,8 @@ class TMTool:
             str: The cleaned string with only Chinese characters and necessary white spaces.
         """
         # Replace multiple occurrences of carriage return, tab, and space characters with a single space
+        import zhon.hanzi
+        zh_pat = f"[{zhon.hanzi.characters}|{zhon.hanzi.punctuation}]"
         text = re.sub("[\r\t ]+", " ", text)
         
         # Use a regular expression to find all Chinese characters in the text
