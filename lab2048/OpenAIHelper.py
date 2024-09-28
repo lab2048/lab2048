@@ -26,7 +26,7 @@ class OpenAIHelper:
     @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
     def ask_gpt(self, prompt, model="gpt-4o-mini", temperature=0, max_tokens=60, original=False):
         response = self.client.chat.completions.create(
-            # model="gpt-4o-mini",
+            model = model,
             messages=[
                 {"role": "user", "content": prompt}
             ],
