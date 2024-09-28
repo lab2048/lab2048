@@ -22,7 +22,7 @@ def plot_counter_plt(counter):
     # Plot the bar chart
     plt.bar(keys, values)
 
-    # Set labels and title
+    # Set labels and title  
     plt.xlabel("Value")
     plt.ylabel("Count")
     plt.title("Counter Result")

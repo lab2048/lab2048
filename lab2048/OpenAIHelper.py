@@ -2,10 +2,10 @@
 To import this module, use the following code in your script:
 
 import sys
-sys.path.append(r'/Users/jirlong/Dropbox/Programming/lib2048')
+sys.path.append(r'/Users/jirlong/Dropbox/Programming/lab2048')
 
 from importlib import reload
-from lib2048 import OpenAIHelper
+from lab2048 import OpenAIHelper
 
 reload(OpenAIHelper)
 aitool = OpenAIHelper.OpenAIHelper()
@@ -24,9 +24,9 @@ class OpenAIHelper:
         self.client = OpenAI(api_key = self.api_key)
     
     @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
-    def ask_gpt(self, prompt, temperature=0, max_tokens=60, original=False):
+    def ask_gpt(self, prompt, model="gpt-4o-mini", temperature=0, max_tokens=60, original=False):
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            # model="gpt-4o-mini",
             messages=[
                 {"role": "user", "content": prompt}
             ],
